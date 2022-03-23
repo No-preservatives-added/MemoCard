@@ -1,7 +1,7 @@
 // MenuScreen.js
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Button, FAB } from "react-native-paper";
+import { FAB, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 export const MenuScreen = () => {
@@ -12,7 +12,7 @@ export const MenuScreen = () => {
   };
 
   const onPressBrowsing = () => {
-    // カードを1枚ずつ表示するプログラム
+    navigation.navigate("Browsing");
   };
 
   const onPressShuffle = () => {
@@ -25,27 +25,15 @@ export const MenuScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Button
-        style={styles.list}
-        mode="outlined"
-        onPress={() => onPressList(item.createdAt)}
-      >
+      <Button style={styles.list} mode="outlined" onPress={onPressList}>
         カード一覧
       </Button>
 
-      <Button
-        style={styles.browsing}
-        mode="outlined"
-        onPress={() => onPressBrowsing(item.createdAt)}
-      >
+      <Button style={styles.browsing} mode="outlined" onPress={onPressBrowsing}>
         カード閲覧
       </Button>
 
-      <Button
-        style={styles.shuffle}
-        mode="outlined"
-        onPress={() => onPressShuffle(item.createdAt)}
-      >
+      <Button style={styles.shuffle} mode="outlined" onPress={onPressShuffle}>
         カードシャッフル
       </Button>
 
