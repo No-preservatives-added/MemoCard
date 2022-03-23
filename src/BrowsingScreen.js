@@ -20,8 +20,9 @@ export const BrowsingScreen = () => {
     // ひとつ後に書いた内容をカードを表示するプログラム
   };
 
-  const onPressAdd = () => {
+  const onPressEdit = () => {
     navigation.navigate("Compose");
+    // 表示されてるカードを抽出してComposeScreenで表示するプログラム
   };
 
   return (
@@ -63,7 +64,7 @@ export const BrowsingScreen = () => {
           right: 0,
           bottom: 600,
         }}
-        onPress={onPressAdd}
+        onPress={onPressEdit}
       >
         編集する
       </Button>
