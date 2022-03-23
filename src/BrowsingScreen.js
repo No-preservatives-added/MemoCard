@@ -27,13 +27,21 @@ export const BrowsingScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <Title></Title>
-      <Title></Title>
-      <Title></Title>
+      <Title
+        style={{
+          marginTop: 32,
+        }}
+      ></Title>
       <Button mode="contained" onPress={onPressReverse}>
         裏面を表示
       </Button>
-      <Title>表面</Title>
+      <Title
+        style={{
+          marginTop: 32,
+        }}
+      >
+        表面
+      </Title>
       <Button
         mode="outlined"
         style={{

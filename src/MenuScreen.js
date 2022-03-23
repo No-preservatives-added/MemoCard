@@ -9,6 +9,7 @@ export const MenuScreen = () => {
 
   const onPressList = () => {
     // カードを入力した順番に表示するプログラム
+    navigation.navigate("List");
   };
 
   const onPressBrowsing = () => {

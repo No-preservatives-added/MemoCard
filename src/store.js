@@ -1,10 +1,6 @@
 import { AsyncStorage } from "react-native";
 
-export const save = async (
-  frontText: string,
-  backText: string,
-  createdAt: number
-) => {
+export const save = async (frontText, backText, createdAt) => {
   const key = `${createdAt}`;
   const value = JSON.stringify({
     frontText,

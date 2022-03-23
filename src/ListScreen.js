@@ -5,16 +5,17 @@ import { useNavigation } from "@react-navigation/native";
 //import format from "date-fns/format";
 import { loadAll } from "./store";
 
-type MemosProps = {
-  id: number;
-  frontText: string;
-  backText: string;
-  createdAt: number;
-};
+const memos = [
+  {
+    frontText: "おもてめんです",
+    backText: "うらめんです",
+    createdAt: 1585574700000,
+  },
+];
 
 export const ListScreen = () => {
   const navigation = useNavigation();
-  const [memos, setMemos] = useState<MemosProps[]>([]);
+  const [memos, setMemos] = useState([]);
 
   useEffect(() => {
     const initialize = async () => {
@@ -28,7 +29,7 @@ export const ListScreen = () => {
   }, [navigation]);
 
   const onPressAdd = () => {
-    //navigation.navigate("Compose");
+    navigation.navigate("Compose");
   };
 
   /*

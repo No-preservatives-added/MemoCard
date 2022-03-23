@@ -22,9 +22,13 @@ export const ComposeScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <Title></Title>
-      <Title></Title>
-      <Title>表面</Title>
+      <Title
+        style={{
+          marginTop: 64,
+        }}
+      >
+        表面
+      </Title>
       <TextInput
         style={{ marginBottom: 16 }}
         mode="outlined"
