@@ -5,9 +5,16 @@ import { useNavigation } from "@react-navigation/native";
 //import format from "date-fns/format";
 import { loadAll } from "./store";
 
-export const MainScreen = () => {
+type MemosProps = {
+  id: number;
+  frontText: string;
+  backText: string;
+  createdAt: number;
+};
+
+export const ListScreen = () => {
   const navigation = useNavigation();
-  const [memos, setMemos] = useState([]);
+  const [memos, setMemos] = useState<MemosProps[]>([]);
 
   useEffect(() => {
     const initialize = async () => {
@@ -21,7 +28,7 @@ export const MainScreen = () => {
   }, [navigation]);
 
   const onPressAdd = () => {
-    navigation.navigate("Compose");
+    //navigation.navigate("Compose");
   };
 
   /*
@@ -43,17 +50,19 @@ export const MainScreen = () => {
         renderItem={({ item }) => (
           <View>
             <List.Item
-              title={item.text}
+              title={item.frontText}
               titleNumberOfLines={5}
               description={item.createdAt}
               descriptionStyle={{ textAlign: "right" }}
             ></List.Item>
+            {/*
             <Button
               mode="contained"
               onPress={() => onPressRemove(item.createdAt)}
             >
               削除
             </Button>
+            */}
           </View>
         )}
       ></FlatList>
