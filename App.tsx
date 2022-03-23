@@ -1,23 +1,24 @@
 import "react-native-gesture-handler";
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Provider as PaperProvider } from "react-native-paper";
+import { MenuScreen } from "./src/MenuScreen";
+import { ComposeScreen } from "./src/ComposeScreen";
+import { BrowsingScreen } from "./src/BrowsingScreen";
 
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Main menu!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Menu" component={MenuScreen} />
+          <Stack.Screen name="Compose" component={ComposeScreen} />
+          <Stack.Screen name="Browsing" component={BrowsingScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
