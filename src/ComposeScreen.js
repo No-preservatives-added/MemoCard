@@ -3,13 +3,18 @@ import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import { TextInput, Button, FAB } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Title } from "react-native-paper";
+import { save } from "./store";
 
 export const ComposeScreen = () => {
-  const [text, setText] = useState("");
+  const [frontText, setFrontText] = useState("");
+  const [backText, setBackText] = useState("");
   const navigation = useNavigation();
 
-  const onPressSave = () => {
+  const onPressSave = async () => {
     // 書いた内容をカードに保存するプログラム
+    await save(frontText, backText, Date.now());
+    //保存時に戻る
+    navigation.goBack();
   };
 
   const onPressBack = () => {
@@ -34,7 +39,7 @@ export const ComposeScreen = () => {
         mode="outlined"
         placeholder="メモを入力してください"
         multiline
-        onChangeText={(text) => setText(text)}
+        onChangeText={(frontText) => setFrontText(frontText)}
       />
       <Title>裏面</Title>
       <TextInput
@@ -42,7 +47,7 @@ export const ComposeScreen = () => {
         mode="outlined"
         placeholder="メモを入力してください"
         multiline
-        onChangeText={(text) => setText(text)}
+        onChangeText={(backText) => setBackText(backText)}
       />
       <Button mode="contained" onPress={onPressSave}>
         保存
