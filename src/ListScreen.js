@@ -4,6 +4,7 @@ import { List, FAB, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 //import format from "date-fns/format";
 import { loadAll } from "./store";
+import { Ionicons } from "@expo/vector-icons";
 
 const memos = [
   {
@@ -56,6 +57,11 @@ export const ListScreen = () => {
               description={item.createdAt}
               descriptionStyle={{ textAlign: "right" }}
             ></List.Item>
+            <Ionicons
+              size={40}
+              name="ios-trash"
+              onPress={() => onPressRemove(item.createdAt)}
+            />
             {/*
             <Button
               mode="contained"

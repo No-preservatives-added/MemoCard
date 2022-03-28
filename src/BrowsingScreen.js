@@ -3,6 +3,7 @@ import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import { Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Title } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
 
 export const BrowsingScreen = () => {
   const [text, setText] = useState("");
@@ -65,7 +66,18 @@ export const BrowsingScreen = () => {
         次→
       </Button>
 
-      <Button
+      <Ionicons
+        style={{
+          position: "absolute",
+          right: 0,
+          bottom: 600,
+        }}
+        size={40}
+        name="md-pencil"
+        onPress={onPressEdit}
+      />
+
+      {/*<Button
         mode="outlined"
         style={{
           position: "absolute",
@@ -75,7 +87,7 @@ export const BrowsingScreen = () => {
         onPress={onPressEdit}
       >
         編集する
-      </Button>
+      </Button>*/}
     </KeyboardAvoidingView>
   );
 };
