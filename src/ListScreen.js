@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { List, FAB, Button, Switch } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 import format from "date-fns/format";
 import { remove, loadAll, removeAll } from "./store";
 
@@ -80,6 +81,11 @@ export const ListScreen = () => {
               descriptionStyle={{ textAlign: "right" }}
             ></List.Item>
             <View style={styles.buttons}>
+            　<Ionicons
+                size={40}
+                name="ios-trash"
+                onPress={() => onPressRemove(item.createdAt)}
+              />
               <Button
                 mode="outlined"
                 onPress={() => onPressEdit(item.createdAt)}
