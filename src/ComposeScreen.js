@@ -3,6 +3,7 @@ import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import { TextInput, Button, FAB } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Title } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
 
 export const ComposeScreen = () => {
   const [text, setText] = useState("");
@@ -47,7 +48,29 @@ export const ComposeScreen = () => {
       <Button mode="contained" onPress={onPressSave}>
         保存
       </Button>
-      <Button
+
+      <Ionicons
+        style={{
+          position: "absolute",
+          right: 300,
+          bottom: 600,
+        }}
+        size={40}
+        name="md-caret-back"
+        onPress={onPressForth}
+      />
+      <Ionicons
+        style={{
+          position: "absolute",
+          right: 16,
+          bottom: 600,
+        }}
+        size={40}
+        name="md-caret-forward"
+        onPress={onPressBack}
+      />
+
+      {/*<Button
         mode="outlined"
         style={{
           position: "absolute",
@@ -68,7 +91,7 @@ export const ComposeScreen = () => {
         onPress={onPressBack}
       >
         次→
-      </Button>
+      </Button>*/}
     </KeyboardAvoidingView>
   );
 };

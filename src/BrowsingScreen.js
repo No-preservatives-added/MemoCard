@@ -43,7 +43,39 @@ export const BrowsingScreen = () => {
       >
         表面
       </Title>
-      <Button
+
+      <Ionicons
+        style={{
+          position: "absolute",
+          right: 300,
+          bottom: 16,
+        }}
+        size={40}
+        name="md-caret-back"
+        onPress={onPressForth}
+      />
+      <Ionicons
+        style={{
+          position: "absolute",
+          right: 16,
+          bottom: 16,
+        }}
+        size={40}
+        name="md-caret-forward"
+        onPress={onPressBack}
+      />
+      <Ionicons
+        style={{
+          position: "absolute",
+          right: 0,
+          bottom: 600,
+        }}
+        size={40}
+        name="md-pencil"
+        onPress={onPressEdit}
+      />
+
+      {/*<Button
         mode="outlined"
         style={{
           position: "absolute",
@@ -65,19 +97,7 @@ export const BrowsingScreen = () => {
       >
         次→
       </Button>
-
-      <Ionicons
-        style={{
-          position: "absolute",
-          right: 0,
-          bottom: 600,
-        }}
-        size={40}
-        name="md-pencil"
-        onPress={onPressEdit}
-      />
-
-      {/*<Button
+      <Button
         mode="outlined"
         style={{
           position: "absolute",
