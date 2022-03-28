@@ -81,23 +81,17 @@ export const ListScreen = () => {
               descriptionStyle={{ textAlign: "right" }}
             ></List.Item>
             <View style={styles.buttons}>
-            　<Ionicons
-                size={40}
-                name="ios-trash"
-                onPress={() => onPressRemove(item.createdAt)}
-              />
               <Button
                 mode="outlined"
                 onPress={() => onPressEdit(item.createdAt)}
               >
                 編集
               </Button>
-              <Button
-                mode="contained"
+              <Ionicons
+                size={40}
+                name="ios-trash"
                 onPress={() => onPressRemove(item.createdAt)}
-              >
-                削除
-              </Button>
+              />
             </View>
           </View>
         )}
@@ -127,9 +121,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   memo: {
-    width: "80%",
+    width: "70%",
   },
   buttons: {
     flex: 1,
+    flexDirection: "row",
   },
 });
