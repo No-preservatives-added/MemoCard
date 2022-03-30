@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, KeyboardAvoidingView } from "react-native";
-import { TextInput, Button, FAB } from "react-native-paper";
+import { TextInput, Button, Title, FAB } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import { Title } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { save } from "./store";
 

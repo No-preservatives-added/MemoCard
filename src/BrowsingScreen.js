@@ -1,13 +1,32 @@
-import React, { useState } from "react";
-import { StyleSheet, KeyboardAvoidingView } from "react-native";
-import { Button } from "react-native-paper";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, KeyboardAvoidingView, ScrollView } from "react-native";
+import { Button, Title, Card, Paragraph } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import { Title } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import { loadAll } from "./store";
 
 export const BrowsingScreen = () => {
-  const [text, setText] = useState("");
   const navigation = useNavigation();
+  const [memos, setMemos] = useState([]);
+  const [page, setPage] = useState(0);
+
+  useEffect(() => {
+    const initialize = async () => {
+      const newMemos = await loadAll();
+      setMemos(newMemos);
+    };
+    const unsubscribe = navigation.addListener("focus", initialize);
+    return unsubscribe;
+  }, [navigation]);
+
+  const getDisplayText = (page) => {
+    const memo = memos[page];
+    const displayText = () => {
+      return `${memo.frontText}`;
+    };
+    //console.log(displayText());
+    return displayText();
+  };
 
   const onPressReverse = () => {
     // カードの裏面を表示するプログラム？
@@ -28,21 +47,28 @@ export const BrowsingScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <Title
-        style={{
-          marginTop: 32,
-        }}
-      ></Title>
-      <Button mode="contained" onPress={onPressReverse}>
-        裏面を表示
-      </Button>
-      <Title
-        style={{
-          marginTop: 32,
-        }}
-      >
-        表面
-      </Title>
+      <ScrollView>
+        <Title
+          style={{
+            marginTop: 32,
+          }}
+        ></Title>
+        <Button mode="contained" onPress={onPressReverse}>
+          裏面を表示
+        </Button>
+        <Title
+          style={{
+            marginTop: 32,
+          }}
+        >
+          表面
+        </Title>
+        <Card>
+          <Card.Content>
+            <Title>{getDisplayText(page)}</Title>
+          </Card.Content>
+        </Card>
+      </ScrollView>
 
       <Ionicons
         style={{
