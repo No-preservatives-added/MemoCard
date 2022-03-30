@@ -6,8 +6,8 @@ import { Title } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 
 export const BrowsingScreen = () => {
-  const [text, setText] = useState("");
   const navigation = useNavigation();
+  const [memos, setMemos] = useState("");
 
   const onPressReverse = () => {
     // カードの裏面を表示するプログラム？
@@ -36,78 +36,25 @@ export const BrowsingScreen = () => {
       <Button mode="contained" onPress={onPressReverse}>
         裏面を表示
       </Button>
-      <Title
-        style={{
-          marginTop: 32,
-        }}
-      >
-        表面
-      </Title>
 
       <Ionicons
-        style={{
-          position: "absolute",
-          right: 300,
-          bottom: 16,
-        }}
+        style={styles.forth}
         size={40}
         name="md-caret-back"
         onPress={onPressForth}
       />
       <Ionicons
-        style={{
-          position: "absolute",
-          right: 16,
-          bottom: 16,
-        }}
+        style={styles.back}
         size={40}
         name="md-caret-forward"
         onPress={onPressBack}
       />
       <Ionicons
-        style={{
-          position: "absolute",
-          right: 0,
-          bottom: 600,
-        }}
+        style={styles.edit}
         size={40}
         name="md-pencil"
         onPress={onPressEdit}
       />
-
-      {/*<Button
-        mode="outlined"
-        style={{
-          position: "absolute",
-          right: 300,
-          bottom: 16,
-        }}
-        onPress={onPressForth}
-      >
-        ←前
-      </Button>
-      <Button
-        mode="outlined"
-        style={{
-          position: "absolute",
-          right: 0,
-          bottom: 16,
-        }}
-        onPress={onPressBack}
-      >
-        次→
-      </Button>
-      <Button
-        mode="outlined"
-        style={{
-          position: "absolute",
-          right: 0,
-          bottom: 600,
-        }}
-        onPress={onPressEdit}
-      >
-        編集する
-      </Button>*/}
     </KeyboardAvoidingView>
   );
 };
@@ -116,5 +63,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+  },
+
+  forth: {
+    position: "absolute",
+    right: 300,
+    bottom: 16,
+  },
+  back: {
+    position: "absolute",
+    right: 16,
+    bottom: 16,
+  },
+  edit: {
+    position: "absolute",
+    right: 0,
+    bottom: 600,
   },
 });
