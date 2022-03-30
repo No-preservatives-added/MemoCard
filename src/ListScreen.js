@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Alert } from "react-native";
 import { List, FAB, Button, Switch, Card } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -48,10 +48,27 @@ export const ListScreen = () => {
   };
 
   //削除ボタン押したとき
+
   const onPressRemove = async (createdAt) => {
-    await remove(createdAt);
-    const newMemos = await loadAll();
-    setMemos(newMemos);
+    Alert.alert(
+      "本当に削除しますか？",
+      "Yes or No ???",
+      [
+        { text: "Yes", onPress: async () => funcA(createdAt) },
+        { text: "No", onPress: () => funcB() },
+      ],
+      { cancelable: false }
+    );
+
+    const funcA = async (createdAt) => {
+      await remove(createdAt);
+      const newMemos = await loadAll();
+      setMemos(newMemos);
+    };
+
+    const funcB = () => {
+      navigation.navigate("List");
+    };
   };
 
   //編集ボタン押したとき
