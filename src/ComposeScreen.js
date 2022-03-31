@@ -1,19 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import { TextInput, Button, FAB } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Title } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
-import { save } from "./store";
+import { save, loadOneCard } from "./store";
 
 export const ComposeScreen = () => {
   const [frontText, setFrontText] = useState("");
   const [backText, setBackText] = useState("");
+  const [editTime, setEditTime] = useState("");
   const navigation = useNavigation();
+  const route = useRoute();
+
+  useEffect(async () => {
+    if (route.params.EditFlag === 1) {
+      const newMemos = await loadOneCard(route.params.createdAt);
+      setFrontText(newMemos.frontText);
+      setBackText(newMemos.backText);
+      setEditTime(newMemos.createdAt);
+    }
+  }, [navigation]);
 
   const onPressSave = async () => {
     // 書いた内容をカードに保存するプログラム
-    await save(frontText, backText, Date.now());
+    if (route.params.EditFlag === 1) {
+      await save(frontText, backText, editTime);
+    } else {
+      await save(frontText, backText, Date.now());
+    }
     //保存時に戻る
     navigation.goBack();
   };
@@ -40,6 +55,7 @@ export const ComposeScreen = () => {
         mode="outlined"
         placeholder="メモを入力してください"
         multiline
+        value={frontText}
         onChangeText={(frontText) => setFrontText(frontText)}
       />
       <Title>裏面</Title>
@@ -48,6 +64,7 @@ export const ComposeScreen = () => {
         mode="outlined"
         placeholder="メモを入力してください"
         multiline
+        value={backText}
         onChangeText={(backText) => setBackText(backText)}
       />
       <Button mode="contained" onPress={onPressSave}>

@@ -19,6 +19,7 @@ export const ListScreen = () => {
   const navigation = useNavigation();
   const [memos, setMemos] = useState([]);
   const [isBack, setIsBack] = useState(false);
+  let EditFlag = 0;
 
   useEffect(() => {
     const initialize = async () => {
@@ -44,7 +45,8 @@ export const ListScreen = () => {
 
   //追加ボタン押したとき
   const onPressAdd = () => {
-    navigation.navigate("Compose");
+    const createdAt = Date.now();
+    navigation.navigate("Compose", { EditFlag, createdAt });
   };
 
   //削除ボタン押したとき
@@ -57,8 +59,10 @@ export const ListScreen = () => {
   //編集ボタン押したとき
   const onPressEdit = async (createdAt) => {
     //編集処理
-    const newMemos = await loadAll();
-    setMemos(newMemos);
+    //const newMemos = await loadAll();
+    //setMemos(newMemos);
+    EditFlag = 1;
+    navigation.navigate("Compose", { EditFlag, createdAt });
   };
 
   return (
