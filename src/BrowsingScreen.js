@@ -38,7 +38,6 @@ export const BrowsingScreen = () => {
     return displayText;
   };
 
-
   const onPressReverse = () => {
     // カードの裏面を表示するプログラム？
   };
@@ -70,7 +69,6 @@ export const BrowsingScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-
       <ScrollView>
         <Title
           style={{
@@ -107,12 +105,7 @@ export const BrowsingScreen = () => {
       </ScrollView>
 
       <Ionicons
-        style={{
-          position: "absolute",
-          left: 16,
-          bottom: 16,
-        }}
-
+        style={styles.forward}
         size={40}
         name="md-caret-back"
         onPress={onPressBack}
@@ -139,9 +132,9 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 
-  forth: {
+  forward: {
     position: "absolute",
-    right: 300,
+    left: 16,
     bottom: 16,
   },
   back: {
@@ -151,7 +144,7 @@ const styles = StyleSheet.create({
   },
   edit: {
     position: "absolute",
-    right: 0,
-    bottom: 600,
+    right: 16,
+    top: 16,
   },
 });
