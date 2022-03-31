@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
-import { List, FAB, Button, Switch } from "react-native-paper";
+import { StyleSheet, View, FlatList, Alert } from "react-native";
+import { List, FAB, Button, Switch, Card } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import format from "date-fns/format";
@@ -19,6 +19,7 @@ export const ListScreen = () => {
   const navigation = useNavigation();
   const [memos, setMemos] = useState([]);
   const [isBack, setIsBack] = useState(false);
+  let EditFlag = 0;
 
   useEffect(() => {
     const initialize = async () => {
@@ -44,67 +45,86 @@ export const ListScreen = () => {
 
   //追加ボタン押したとき
   const onPressAdd = () => {
-    navigation.navigate("Compose");
+    const createdAt = Date.now();
+    navigation.navigate("Compose", { EditFlag, createdAt });
   };
 
   //削除ボタン押したとき
+
   const onPressRemove = async (createdAt) => {
-    await remove(createdAt);
-    const newMemos = await loadAll();
-    setMemos(newMemos);
+    Alert.alert(
+      "本当に削除しますか？",
+      "Yes or No ???",
+      [
+        { text: "Yes", onPress: async () => funcA(createdAt) },
+        { text: "No", onPress: () => funcB() },
+      ],
+      { cancelable: false }
+    );
+
+    const funcA = async (createdAt) => {
+      await remove(createdAt);
+      const newMemos = await loadAll();
+      setMemos(newMemos);
+    };
+
+    const funcB = () => {
+      navigation.navigate("List");
+    };
   };
 
   //編集ボタン押したとき
   const onPressEdit = async (createdAt) => {
     //編集処理
-    const newMemos = await loadAll();
-    setMemos(newMemos);
+    //const newMemos = await loadAll();
+    //setMemos(newMemos);
+    EditFlag = 1;
+    navigation.navigate("Compose", { EditFlag, createdAt });
   };
 
   return (
     <View style={styles.container}>
       <Switch value={isBack} onValueChange={onToggleSwitch} />
+
       <FlatList
         style={styles.list}
         data={memos}
         keyExtractor={(item) => `${item.createdAt}`}
         renderItem={({ item }) => (
-          <View style={styles.oneMemo}>
-            <List.Item
-              style={styles.memo}
-              title={getDisplayText(item)}
-              titleNumberOfLines={5}
-              description={`作成日時: ${format(
-                item.createdAt,
-                "yyyy.MM.dd HH:mm"
-              )}`}
-              descriptionStyle={{ textAlign: "right" }}
-            ></List.Item>
-            <View style={styles.buttons}>
-              <Button
-                mode="outlined"
-                onPress={() => onPressEdit(item.createdAt)}
-              >
-                編集
-              </Button>
-              <Ionicons
-                size={40}
-                name="ios-trash"
-                onPress={() => onPressRemove(item.createdAt)}
-              />
-            </View>
+          <View>
+            <Card style={styles.card}>
+              <Card.Content>
+                <View style={styles.oneMemo}>
+                  <List.Item
+                    style={styles.memo}
+                    title={getDisplayText(item)}
+                    titleNumberOfLines={5}
+                    description={`作成日時: ${format(
+                      item.createdAt,
+                      "yyyy.MM.dd HH:mm"
+                    )}`}
+                    descriptionStyle={{ textAlign: "right" }}
+                  ></List.Item>
+                  <View style={styles.buttons}>
+                    <Ionicons
+                      size={40}
+                      name="md-pencil"
+                      onPress={() => onPressEdit(item.createdAt)}
+                    />
+                    <Ionicons
+                      size={40}
+                      name="ios-trash"
+                      onPress={() => onPressRemove(item.createdAt)}
+                    />
+                  </View>
+                </View>
+              </Card.Content>
+            </Card>
           </View>
         )}
       ></FlatList>
-      <FAB
-        style={{
-          position: "absolute",
-          right: 16,
-          bottom: 16,
-        }}
-        icon="plus"
-        onPress={() => onPressAdd()}
-      />
+
+      <FAB style={styles.Add} icon="plus" onPress={() => onPressAdd()} />
     </View>
   );
 };
@@ -116,6 +136,9 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
   },
+  card: {
+    marginBottom: 1,
+  },
   oneMemo: {
     flex: 1,
     flexDirection: "row",
@@ -126,5 +149,10 @@ const styles = StyleSheet.create({
   buttons: {
     flex: 1,
     flexDirection: "row",
+  },
+  Add: {
+    position: "absolute",
+    right: 16,
+    bottom: 16,
   },
 });

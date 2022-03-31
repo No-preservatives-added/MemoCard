@@ -12,6 +12,7 @@ import { loadAll } from "./store";
 
 export const BrowsingScreen = () => {
   const navigation = useNavigation();
+
   const [memos, setMemos] = useState([
     {
       backText: "backText",
@@ -36,6 +37,7 @@ export const BrowsingScreen = () => {
     const displayText = isBack ? memo.backText : memo.frontText;
     return displayText;
   };
+
 
   const onPressReverse = () => {
     // カードの裏面を表示するプログラム？
@@ -68,6 +70,7 @@ export const BrowsingScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
+
       <ScrollView>
         <Title
           style={{
@@ -109,64 +112,23 @@ export const BrowsingScreen = () => {
           left: 16,
           bottom: 16,
         }}
+
         size={40}
         name="md-caret-back"
         onPress={onPressBack}
       />
       <Ionicons
-        style={{
-          position: "absolute",
-          right: 16,
-          bottom: 16,
-        }}
+        style={styles.back}
         size={40}
         name="md-caret-forward"
         onPress={onPressForward}
       />
       <Ionicons
-        style={{
-          position: "absolute",
-          right: 0,
-          bottom: 600,
-        }}
+        style={styles.edit}
         size={40}
         name="md-pencil"
         onPress={onPressEdit}
       />
-
-      {/*<Button
-        mode="outlined"
-        style={{
-          position: "absolute",
-          right: 300,
-          bottom: 16,
-        }}
-        onPress={onPressForth}
-      >
-        ←前
-      </Button>
-      <Button
-        mode="outlined"
-        style={{
-          position: "absolute",
-          right: 0,
-          bottom: 16,
-        }}
-        onPress={onPressBack}
-      >
-        次→
-      </Button>
-      <Button
-        mode="outlined"
-        style={{
-          position: "absolute",
-          right: 0,
-          bottom: 600,
-        }}
-        onPress={onPressEdit}
-      >
-        編集する
-      </Button>*/}
     </KeyboardAvoidingView>
   );
 };
@@ -175,5 +137,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+  },
+
+  forth: {
+    position: "absolute",
+    right: 300,
+    bottom: 16,
+  },
+  back: {
+    position: "absolute",
+    right: 16,
+    bottom: 16,
+  },
+  edit: {
+    position: "absolute",
+    right: 0,
+    bottom: 600,
   },
 });

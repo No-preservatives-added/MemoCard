@@ -22,6 +22,13 @@ export const removeAll = async () => {
   });
 };
 
+export const loadOneCard = async (createdAt) => {
+  const key = `${createdAt}`;
+  const Data = await AsyncStorage.getItem(key); // (3)
+  const Memo = JSON.parse(Data);
+  return Memo; // (4)
+};
+
 export const loadAll = async () => {
   const keys = await AsyncStorage.getAllKeys();
   keys.sort();
