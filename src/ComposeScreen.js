@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, KeyboardAvoidingView } from "react-native";
-import { TextInput, Button, FAB } from "react-native-paper";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { Title } from "react-native-paper";
+
+import { TextInput, Button, Title, FAB } from "react-native-paper";
+import { useNavigation,useRoute } from "@react-navigation/native";
+
 import { Ionicons } from "@expo/vector-icons";
 import { save, loadOneCard } from "./store";
 
