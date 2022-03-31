@@ -72,48 +72,17 @@ export const ComposeScreen = () => {
       </Button>
 
       <Ionicons
-        style={{
-          position: "absolute",
-          right: 300,
-          bottom: 600,
-        }}
+        style={styles.forth}
         size={40}
         name="md-caret-back"
         onPress={onPressForth}
       />
       <Ionicons
-        style={{
-          position: "absolute",
-          right: 16,
-          bottom: 600,
-        }}
+        style={styles.back}
         size={40}
         name="md-caret-forward"
         onPress={onPressBack}
       />
-
-      {/*<Button
-        mode="outlined"
-        style={{
-          position: "absolute",
-          right: 300,
-          bottom: 600,
-        }}
-        onPress={onPressForth}
-      >
-        ←前
-      </Button>
-      <Button
-        mode="outlined"
-        style={{
-          position: "absolute",
-          right: 0,
-          bottom: 600,
-        }}
-        onPress={onPressBack}
-      >
-        次→
-      </Button>*/}
     </KeyboardAvoidingView>
   );
 };
@@ -122,5 +91,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+  },
+  forth: {
+    position: "absolute",
+    right: 300,
+    bottom: 600,
+  },
+  back: {
+    position: "absolute",
+    right: 16,
+    bottom: 600,
   },
 });
