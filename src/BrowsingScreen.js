@@ -46,24 +46,24 @@ export const BrowsingScreen = () => {
   //const onPressReverse = () => setIsReverse(!isReverse);
   const onPressReverse = () => setIsReverse(true);
 
-  const onPressForward = () => {
-    // ひとつ後に書いた内容をカードを表示するプログラム
-    if (page + 1 >= memos.length) {
-      //console.log("over!");
-      Alert.alert("最後のカードです");
-    } else {
-      setPage(page + 1);
-      setIsReverse(false); //裏を表示しない
-    }
-  };
-
-  const onPressBack = () => {
-    // ひとつ前に書いた内容をカードを表示するプログラム
+  const onPressPrev = () => {
+    // 前のカードに移動
     if (page - 1 < 0) {
       //console.log("under!");
       Alert.alert("最初のカードです");
     } else {
       setPage(page - 1);
+      setIsReverse(false); //裏を表示しない
+    }
+  };
+
+  const onPressNext = () => {
+    // 後のカードに移動
+    if (page + 1 >= memos.length) {
+      //console.log("over!");
+      Alert.alert("最後のカードです");
+    } else {
+      setPage(page + 1);
       setIsReverse(false); //裏を表示しない
     }
   };
@@ -113,16 +113,16 @@ export const BrowsingScreen = () => {
       </ScrollView>
 
       <Ionicons
-        style={styles.forward}
+        style={styles.prev}
         size={40}
         name="md-caret-back"
-        onPress={onPressBack}
+        onPress={onPressPrev}
       />
       <Ionicons
-        style={styles.back}
+        style={styles.next}
         size={40}
         name="md-caret-forward"
-        onPress={onPressForward}
+        onPress={onPressNext}
       />
       <Ionicons
         style={styles.edit}
@@ -140,12 +140,12 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 
-  forward: {
+  prev: {
     position: "absolute",
     left: 16,
     bottom: 16,
   },
-  back: {
+  next: {
     position: "absolute",
     right: 16,
     bottom: 16,

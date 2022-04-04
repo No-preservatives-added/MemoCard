@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, KeyboardAvoidingView } from "react-native";
 
 import { TextInput, Button, Title, FAB } from "react-native-paper";
-import { useNavigation,useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { Ionicons } from "@expo/vector-icons";
 import { save, loadOneCard } from "./store";
@@ -34,12 +34,12 @@ export const ComposeScreen = () => {
     navigation.goBack();
   };
 
-  const onPressBack = () => {
-    // ひとつ前に書いた内容をカードに保存するプログラム
+  const onPressPrev = () => {
+    // 前のカードに移動
   };
 
-  const onPressForth = () => {
-    // ひとつ後に書いた内容をカードに保存するプログラム
+  const onPressNext = () => {
+    // 次のカードに移動
   };
 
   return (
@@ -73,16 +73,16 @@ export const ComposeScreen = () => {
       </Button>
 
       <Ionicons
-        style={styles.forth}
+        style={styles.prev}
         size={40}
         name="md-caret-back"
-        onPress={onPressForth}
+        onPress={onPressPrev}
       />
       <Ionicons
-        style={styles.back}
+        style={styles.next}
         size={40}
         name="md-caret-forward"
-        onPress={onPressBack}
+        onPress={onPressNext}
       />
     </KeyboardAvoidingView>
   );
@@ -93,14 +93,14 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  forth: {
+  prev: {
     position: "absolute",
-    right: 300,
-    bottom: 600,
+    left: 16,
+    top: 16,
   },
-  back: {
+  next: {
     position: "absolute",
     right: 16,
-    bottom: 600,
+    top: 16,
   },
 });
