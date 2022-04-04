@@ -12,7 +12,6 @@ import { loadAll } from "./store";
 
 export const BrowsingScreen = () => {
   const navigation = useNavigation();
-
   const [memos, setMemos] = useState([
     {
       backText: "backText",
@@ -21,6 +20,7 @@ export const BrowsingScreen = () => {
     },
   ]);
   const [page, setPage] = useState(0);
+  const [isReverse, setIsReverse] = useState(false);
 
   useEffect(() => {
     const initialize = async () => {
@@ -34,37 +34,45 @@ export const BrowsingScreen = () => {
   const getDisplayText = (page, isBack) => {
     //console.log(memos);
     const memo = memos[page];
-    const displayText = isBack ? memo.backText : memo.frontText;
+    const displayText = isBack
+      ? isReverse
+        ? memo.backText
+        : ""
+      : memo.frontText;
     return displayText;
   };
 
-  const onPressReverse = () => {
-    // カードの裏面を表示するプログラム？
-  };
+  // カードの裏面を表示するプログラム？
+  //const onPressReverse = () => setIsReverse(!isReverse);
+  const onPressReverse = () => setIsReverse(true);
 
-  const onPressForward = () => {
-    // ひとつ後に書いた内容をカードを表示するプログラム
-    if (page + 1 >= memos.length) {
-      //console.log("over!");
-      Alert.alert("最後のカードです");
-    } else {
-      setPage(page + 1);
-    }
-  };
-
-  const onPressBack = () => {
-    // ひとつ前に書いた内容をカードを表示するプログラム
+  const onPressPrev = () => {
+    // 前のカードに移動
     if (page - 1 < 0) {
       //console.log("under!");
       Alert.alert("最初のカードです");
     } else {
       setPage(page - 1);
+      setIsReverse(false); //裏を表示しない
+    }
+  };
+
+  const onPressNext = () => {
+    // 後のカードに移動
+    if (page + 1 >= memos.length) {
+      //console.log("over!");
+      Alert.alert("最後のカードです");
+    } else {
+      setPage(page + 1);
+      setIsReverse(false); //裏を表示しない
     }
   };
 
   const onPressEdit = () => {
-    navigation.navigate("Compose");
-    // 表示されてるカードを抽出してComposeScreenで表示するプログラム
+    //編集処理
+    let EditFlag = 1;
+    let createdAt = memos[page].createdAt;
+    navigation.navigate("Compose", { EditFlag, createdAt });
   };
 
   return (
@@ -105,16 +113,16 @@ export const BrowsingScreen = () => {
       </ScrollView>
 
       <Ionicons
-        style={styles.forward}
+        style={styles.prev}
         size={40}
         name="md-caret-back"
-        onPress={onPressBack}
+        onPress={onPressPrev}
       />
       <Ionicons
-        style={styles.back}
+        style={styles.next}
         size={40}
         name="md-caret-forward"
-        onPress={onPressForward}
+        onPress={onPressNext}
       />
       <Ionicons
         style={styles.edit}
@@ -132,12 +140,12 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 
-  forward: {
+  prev: {
     position: "absolute",
     left: 16,
     bottom: 16,
   },
-  back: {
+  next: {
     position: "absolute",
     right: 16,
     bottom: 16,
