@@ -54,7 +54,7 @@ export const ListScreen = () => {
   const onPressRemove = async (createdAt) => {
     Alert.alert(
       "本当に削除しますか？",
-      "Yes or No ???",
+      "",
       [
         { text: "Yes", onPress: async () => funcA(createdAt) },
         { text: "No", onPress: () => funcB() },
@@ -68,9 +68,7 @@ export const ListScreen = () => {
       setMemos(newMemos);
     };
 
-    const funcB = () => {
-      navigation.navigate("List");
-    };
+    const funcB = () => {};
   };
 
   //編集ボタン押したとき
