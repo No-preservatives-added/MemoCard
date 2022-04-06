@@ -54,7 +54,7 @@ export const ComposeScreen = () => {
       <TextInput
         style={{ marginBottom: 16 }}
         mode="outlined"
-        placeholder="メモを入力してください"
+        placeholder="表面の内容を入力してください"
         multiline
         value={frontText}
         onChangeText={(frontText) => setFrontText(frontText)}
@@ -63,7 +63,7 @@ export const ComposeScreen = () => {
       <TextInput
         style={{ marginBottom: 16 }}
         mode="outlined"
-        placeholder="メモを入力してください"
+        placeholder="裏面の内容を入力してください"
         multiline
         value={backText}
         onChangeText={(backText) => setBackText(backText)}
