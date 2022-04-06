@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList, Alert } from "react-native";
+import { StyleSheet, SafeAreaView, View, FlatList, Alert } from "react-native";
 import { List, FAB, Button, Switch, Card } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -81,7 +81,7 @@ export const ListScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Switch value={isBack} onValueChange={onToggleSwitch} />
 
       <FlatList
@@ -123,7 +123,7 @@ export const ListScreen = () => {
       ></FlatList>
 
       <FAB style={styles.Add} icon="plus" onPress={() => onPressAdd()} />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   card: {
-    marginBottom: 1,
+    marginBottom: 1, //カードとカードの隙間
   },
   oneMemo: {
     flex: 1,

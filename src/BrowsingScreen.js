@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
-  KeyboardAvoidingView,
+  SafeAreaView,
   ScrollView,
+  KeyboardAvoidingView,
   Alert,
 } from "react-native";
 import { Button, Title, Card, Paragraph } from "react-native-paper";
@@ -76,7 +77,7 @@ export const BrowsingScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <Title
           style={{
@@ -111,7 +112,6 @@ export const BrowsingScreen = () => {
           </Card.Content>
         </Card>
       </ScrollView>
-
       <Ionicons
         style={styles.prev}
         size={40}
@@ -130,7 +130,7 @@ export const BrowsingScreen = () => {
         name="md-pencil"
         onPress={onPressEdit}
       />
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
