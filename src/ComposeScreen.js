@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, KeyboardAvoidingView } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  KeyboardAvoidingView,
+} from "react-native";
 
 import { TextInput, Button, Title, FAB } from "react-native-paper";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -43,48 +48,52 @@ export const ComposeScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <Title
-        style={{
-          marginTop: 64,
-        }}
-      >
-        表面
-      </Title>
-      <TextInput
-        style={{ marginBottom: 16 }}
-        mode="outlined"
-        placeholder="メモを入力してください"
-        multiline
-        value={frontText}
-        onChangeText={(frontText) => setFrontText(frontText)}
-      />
-      <Title>裏面</Title>
-      <TextInput
-        style={{ marginBottom: 16 }}
-        mode="outlined"
-        placeholder="メモを入力してください"
-        multiline
-        value={backText}
-        onChangeText={(backText) => setBackText(backText)}
-      />
-      <Button mode="contained" onPress={onPressSave}>
-        保存
-      </Button>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <KeyboardAvoidingView style={styles.container}>
+          <Title
+            style={{
+              marginTop: 64,
+            }}
+          >
+            表面
+          </Title>
+          <TextInput
+            style={{ marginBottom: 16 }}
+            mode="outlined"
+            placeholder="メモを入力してください"
+            multiline
+            value={frontText}
+            onChangeText={(frontText) => setFrontText(frontText)}
+          />
+          <Title>裏面</Title>
+          <TextInput
+            style={{ marginBottom: 16 }}
+            mode="outlined"
+            placeholder="メモを入力してください"
+            multiline
+            value={backText}
+            onChangeText={(backText) => setBackText(backText)}
+          />
+          <Button mode="contained" onPress={onPressSave}>
+            保存
+          </Button>
 
-      <Ionicons
-        style={styles.prev}
-        size={40}
-        name="md-caret-back"
-        onPress={onPressPrev}
-      />
-      <Ionicons
-        style={styles.next}
-        size={40}
-        name="md-caret-forward"
-        onPress={onPressNext}
-      />
-    </KeyboardAvoidingView>
+          <Ionicons
+            style={styles.prev}
+            size={40}
+            name="md-caret-back"
+            onPress={onPressPrev}
+          />
+          <Ionicons
+            style={styles.next}
+            size={40}
+            name="md-caret-forward"
+            onPress={onPressNext}
+          />
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
