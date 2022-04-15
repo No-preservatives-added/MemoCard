@@ -35,3 +35,19 @@ export const loadAll = async () => {
   const entryList = await AsyncStorage.multiGet(keys);
   return entryList.map((entry) => JSON.parse(entry[1]));
 };
+
+export const filtered = async (query) => {
+  const keys = await AsyncStorage.getAllKeys();
+  keys.sort();
+  const entryList = await AsyncStorage.multiGet(keys);
+  console.log(query);
+  console.log(entryList.map((entry) => JSON.parse(entry[1])));
+  const objList = entryList.map((entry) => JSON.parse(entry[1]));
+  const filteredList = [];
+  objList.forEach((obj) => {
+    if (obj.frontText.indexOf(query) > -1) {
+      filteredList.push(obj);
+    }
+  });
+  return filteredList;
+};

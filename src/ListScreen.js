@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, SafeAreaView, View, FlatList, Alert } from "react-native";
-import { List, FAB, Button, Switch, Card } from "react-native-paper";
+import { List, FAB, Button, Switch, Card, Searchbar } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import format from "date-fns/format";
-import { remove, loadAll, removeAll } from "./store";
+import { filtered, remove, loadAll, removeAll } from "./store";
 
 //テスト用データ
 /*const memos = [
@@ -18,6 +18,7 @@ import { remove, loadAll, removeAll } from "./store";
 export const ListScreen = () => {
   const navigation = useNavigation();
   const [memos, setMemos] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [isBack, setIsBack] = useState(false);
   let EditFlag = 0;
 
@@ -26,13 +27,24 @@ export const ListScreen = () => {
       const newMemos = await loadAll();
       //データ破損時全削除用
       //await removeAll();
-      setMemos(newMemos);
+      //setMemos(newMemos);
+      //フィルターテスト
+      const filteredMemos = await filtered("さかな");
+      setMemos(filteredMemos);
     };
 
     const unsubscribe = navigation.addListener("focus", initialize);
 
     return unsubscribe;
   }, [navigation]);
+
+  //検索バー
+  const onChangeSearch = async () => {
+    //setSearchQuery(query);
+    //const filteredMemos = await filtered(query);
+    const filteredMemos = await filtered("さかな");
+    setMemos(filteredMemos);
+  };
 
   //表裏切り替えスイッチ反転
   const onToggleSwitch = () => setIsBack(!isBack);
@@ -50,7 +62,6 @@ export const ListScreen = () => {
   };
 
   //削除ボタン押したとき
-
   const onPressRemove = async (createdAt) => {
     Alert.alert(
       "本当に削除しますか？",
@@ -82,8 +93,12 @@ export const ListScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Searchbar
+        placeholder="Search"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+      />
       <Switch value={isBack} onValueChange={onToggleSwitch} />
-
       <FlatList
         style={styles.list}
         data={memos}
