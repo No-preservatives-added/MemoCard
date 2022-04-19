@@ -4,7 +4,7 @@ import { List, FAB, Button, Switch, Card } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import format from "date-fns/format";
-import { remove, loadAll, removeAll } from "./store";
+import { remove, loadAll, loadAllrandom, removeAll } from "./store";
 
 //テスト用データ
 /*const memos = [
