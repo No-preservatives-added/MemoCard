@@ -17,7 +17,7 @@ export const MenuScreen = () => {
   };
 
   const onPressShuffle = () => {
-    // カードをランダムに並べ替えて表示するプログラム
+    navigation.navigate("Shuffle");
   };
 
   return (

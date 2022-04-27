@@ -8,9 +8,9 @@ import {
 import { Button, Title, Card, Paragraph } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { loadAll } from "./store";
+import { loadAllrandom } from "./store";
 
-export const BrowsingScreen = () => {
+export const ShuffleScreen = () => {
   const navigation = useNavigation();
   const [memos, setMemos] = useState([
     {
@@ -24,7 +24,7 @@ export const BrowsingScreen = () => {
 
   useEffect(() => {
     const initialize = async () => {
-      const newMemos = await loadAll();
+      const newMemos = await loadAllrandom();
       setMemos(newMemos);
     };
     const unsubscribe = navigation.addListener("focus", initialize);

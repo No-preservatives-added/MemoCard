@@ -41,20 +41,23 @@ export const loadAllrandom = async () => {
 
   const shuffleArray = (array) => {
     const cloneArray = [...array];
+    //配列のコピーを作ります。
 
     for (let i = cloneArray.length - 1; i >= 0; i--) {
       let rand = Math.floor(Math.random() * (i + 1));
-      // 配列の要素の順番を入れ替える
+      //配列の要素の順番を入れ替える
       let tmpStorage = cloneArray[i];
+      //配列の要素うちi番目を持ってきます
       cloneArray[i] = cloneArray[rand];
+      //i番目の要素を入れ替える要素に置き換えます
       cloneArray[rand] = tmpStorage;
+      //入れ替える要素を初めに持ってきていた要素と置き換えます
     }
 
     return cloneArray;
+    //並び変えた配列で返します。
   };
 
-  keys.sort(shuffleArray(keys.createdAt));
-
-  const entryList = await AsyncStorage.multiGet(keys);
+  const entryList = await AsyncStorage.multiGet(shuffleArray(keys));
   return entryList.map((entry) => JSON.parse(entry[1]));
 };
